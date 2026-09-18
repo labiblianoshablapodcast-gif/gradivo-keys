@@ -1,0 +1,3 @@
+export type LessonProgress={completed:boolean;bestAttempts:number|null;errorKinds:Record<string,number>};
+export const initialProgress:Record<string,LessonProgress>={semitone:{completed:false,bestAttempts:null,errorKinds:{}},tone:{completed:false,bestAttempts:null,errorKinds:{}},pattern:{completed:false,bestAttempts:null,errorKinds:{}},scale:{completed:false,bestAttempts:null,errorKinds:{}},challenge:{completed:false,bestAttempts:null,errorKinds:{}}};
+export function completionPercent(p:Record<string,LessonProgress>){const v=Object.values(p);return Math.round(v.filter(x=>x.completed).length/v.length*100)}
