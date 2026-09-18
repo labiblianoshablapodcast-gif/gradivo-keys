@@ -1,0 +1,1 @@
+export const colors={navy:'#071426',navy2:'#0D2038',cream:'#F7F2E8',gold:'#D7B66A',white:'#FFFFFF',muted:'#A9B2BF'};
