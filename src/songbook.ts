@@ -1,0 +1,6 @@
+export type SongLine={lyrics:string;chords?:string[]};export type Song={id:string;title:string;author:string;key:string;lines:SongLine[]};
+export const KEYS=['C','C#','D','Eb','E','F','F#','G','Ab','A','Bb','B'] as const;
+const PC:Record<string,number>={C:0,'B#':0,'C#':1,Db:1,D:2,'D#':3,Eb:3,E:4,Fb:4,'E#':5,F:5,'F#':6,Gb:6,G:7,'G#':8,Ab:8,A:9,'A#':10,Bb:10,B:11,Cb:11};
+const SHARP=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];const FLAT=['C','Db','D','Eb','E','F','Gb','G','Ab','A','Bb','B'];
+export function transposeChord(chord:string,fromKey:string,toKey:string){const m=chord.match(/^([A-G](?:#|b)?)(.*)$/);if(!m)return chord;const delta=((PC[toKey]-PC[fromKey])%12+12)%12;const flats=toKey.includes('b')||['F','Bb','Eb','Ab'].includes(toKey);const names=flats?FLAT:SHARP;const root=names[(PC[m[1]]+delta)%12];let suffix=m[2];suffix=suffix.replace(/\/([A-G](?:#|b)?)/,(_,bass)=>'/'+names[(PC[bass]+delta)%12]);return root+suffix;}
+export const DEMO_SONG:Song={id:'original-demo',title:'Camina con Propósito',author:'Ejercicio original de Gradivo',key:'C',lines:[{chords:['C','G','Am','F'],lyrics:'Sigo adelante, aprendiendo el patrón'},{chords:['C','G','F'],lyrics:'Cada nueva pieza me ayuda a comprender'},{chords:['Am','F','C','G'],lyrics:'La tonalidad cambia, el lenguaje permanece'}]};
