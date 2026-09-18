@@ -1,0 +1,4 @@
+export const MAJOR_PATTERN=[2,2,1,2,2,2,1] as const;
+export type ErrorKind='tooShort'|'tooFar'|'wrongKey';
+export function classifyMove(from:number,to:number,expected:number):ErrorKind{const moved=Math.abs(to-from);if(moved<expected)return'tooShort';if(moved>expected)return'tooFar';return'wrongKey'}
+export function feedback(attempt:number,kind:ErrorKind,expected:number){if(attempt===1)return'Esa pieza no encaja. Inténtalo otra vez.';if(attempt===2)return'Cuenta cada tecla, blanca o negra, como 1 semitono.';if(kind==='tooShort')return'Te detuviste antes de completar la distancia. Cuenta cada tecla y vuelve a intentarlo.';if(kind==='tooFar')return'Avanzaste más de la distancia necesaria. Cuenta cada tecla y vuelve a intentarlo.';return `Necesitas avanzar exactamente ${expected} semitono${expected===1?'':'s'}. Ahora selecciónalo tú.`}
