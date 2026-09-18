@@ -1,0 +1,3 @@
+export const PROGRESSIONS=[{id:'1451',degrees:['I','IV','V','I'],label:'I – IV – V – I'},{id:'1564',degrees:['I','V','vi','IV'],label:'I – V – vi – IV'},{id:'6415',degrees:['vi','IV','I','V'],label:'vi – IV – I – V'}] as const;
+export const CHORDS={C:{I:'C',ii:'Dm',iii:'Em',IV:'F',V:'G',vi:'Am','vii°':'Bdim'},D:{I:'D',ii:'Em',iii:'F#m',IV:'G',V:'A',vi:'Bm','vii°':'C#dim'},G:{I:'G',ii:'Am',iii:'Bm',IV:'C',V:'D',vi:'Em','vii°':'F#dim'}} as const;
+export function progressionChords(key:keyof typeof CHORDS,degrees:readonly string[]){const map=CHORDS[key] as Record<string,string>;return degrees.map(d=>map[d]);}
