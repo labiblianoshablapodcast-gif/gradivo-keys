@@ -1,4 +1,5 @@
-export const CHROMATIC=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'] as const;
 export const MAJOR_STEPS=[2,2,1,2,2,2,1] as const;
-export function majorScale(root:number){let p=root;const out=[CHROMATIC[p%12]];for(const s of MAJOR_STEPS){p+=s;out.push(CHROMATIC[p%12])}return out}
+export const MAJOR_SCALES={C:['C','D','E','F','G','A','B','C'],D:['D','E','F#','G','A','B','C#','D'],F:['F','G','A','Bb','C','D','E','F'],G:['G','A','B','C','D','E','F#','G']} as const;
+export type MajorKey=keyof typeof MAJOR_SCALES;
+export function majorScale(root:number|string){if(typeof root==='string'&&root in MAJOR_SCALES)return [...MAJOR_SCALES[root as MajorKey]];const byRoot:Record<number,MajorKey>={0:'C',2:'D',5:'F',7:'G'};const key=byRoot[Number(root)%12];if(key)return [...MAJOR_SCALES[key]];const chromatic=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];let p=Number(root);const out=[chromatic[p%12]];for(const s of MAJOR_STEPS){p+=s;out.push(chromatic[p%12])}return out}
 export const SCALE_EXAMPLES=[{name:'C',root:0},{name:'D',root:2},{name:'F',root:5},{name:'G',root:7}] as const;
